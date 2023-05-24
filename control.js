@@ -438,7 +438,7 @@ bob.sendMessage(m.chat, {document: {url: data.url}, fileName: data.filename, mim
         }
 
 
-        //Privasi User!
+        /*Privasi User!
         if (!m.isGroup) {
             try {
                 await bob.chatModify({
@@ -449,7 +449,7 @@ bob.sendMessage(m.chat, {document: {url: data.url}, fileName: data.filename, mim
             } catch (e) {
                 reply(`Habis Restart. Silahkan Ulangi Kembali Command nya ya`)
             } 
-        }
+        }*/
         
          if (!m.isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32m ✓ \x1b[1;37m]', color(pushname), 'use', color(command), 'args :', color(args.length))
             if (isCmd && m.isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32m ✓ \x1b[1;37m]', color(pushname), 'use', color(command), 'in group', color(groupName), 'args :', color(args.length))
@@ -830,6 +830,10 @@ ${isi}
                         var img = fs.readFileSync('./media/icon.png')
                         console.log(img)
                         bob.sendMessage(m.chat, {text: hasil.quotes + `\n\n` + `~ ${hasil.author}`}, {quoted: m})
+                        config(tiktokresi);
+                        createAudioFromText(hasil.quotes, 'quotes', 'id_001')
+                        await sleep(3000)
+                        bob.sendMessage(m.chat, {audio: fs.readFileSync(`quotes.mp3`), mimetype: 'audio/mp4', ptt: true}, {quoted: m})
                     }
                     break
                     case 'tts': case 'sbot' :{
@@ -838,6 +842,21 @@ ${isi}
                         createAudioFromText(q, 'myAudio', 'id_001')
                         await sleep(3000)
                         bob.sendMessage(m.chat, {audio: fs.readFileSync(`myAudio.mp3`), mimetype: 'audio/mp4', ptt: true}, {quoted: m})
+                    }
+                    break
+                    case 'ttsjp': case 'jpbot' :{
+                        if (!args.length === "12") return reply(`Text Terlalu Panjang`)
+                        config(tiktokresi);
+                        createAudioFromText(q, 'myAudio', 'jp_001')
+                        await sleep(3000)
+                        bob.sendMessage(m.chat, {audio: fs.readFileSync(`myAudio.mp3`), mimetype: 'audio/mp4', ptt: true}, {quoted: m})
+                    }
+                    break
+                    case 'songb': {
+                        config(tiktokresi);
+                        createAudioFromText(q, 'songb', 'id_001')
+                        await sleep(3000)
+                        bob.sendMessage(m.chat, {audio: fs.readFileSync(`songb.mp3`), mimetype: 'audio/mp4'}, {quoted: m})
                     }
                     break
                     case 'menfess': {
