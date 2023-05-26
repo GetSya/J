@@ -481,7 +481,7 @@ _*NOTE : Anggap "< dan > tidak ada!"*_
 - ${prefix}qc _< Text >_
 - ${prefix}tohd < Reply Image >
 - ${prefix}take < PackName|Author >
-- ${prefix}take < Text >
+- ${prefix}tts < Text >
 
 *Maker Menu*
 - ${prefix}sketch-logo _< Text >_
@@ -508,7 +508,6 @@ _*NOTE : Anggap "< dan > tidak ada!"*_
 - ${prefix}self
 - ${prefix}block _< 629XXX >_
 - ${prefix}unblock _< 628XXX >_
-- ${prefix}clearall
 
 *Group Menu*
 - ${prefix}setppgc _< Reply Gambar >_
@@ -1552,17 +1551,6 @@ ${isi}
                             }
                     }
                     break
-                    case 'clearall': {
-                    for (let i of store.chats.all()) {                        
-                    await bob.chatModify({
-                    delete: true,
-                    lastMessages: [{ key: m.key, messageTimestamp: m.messageTimestamp }]
-                    },
-                    i.id)
-                    reply(`Sukses Membersihkan Chat.`)
-                    }
-                }
-                    break
                     
                     case 'unblock': {
                         if (!isCreator) return reply(global.mess.owner)
@@ -1607,15 +1595,7 @@ ${isi}
                     reply(response.data.choices[0].text.trim())
                     
                     }  */ 
-                    if (body && !m.isGroup) {
-                        bob.sendPresenceUpdate('recording', m.chat) 
-                        var apisim = await fetchJson(`https://api.simsimi.net/v2/?text=${m.text}&lc=id`)
-                        config(tiktokresi);
-                        await sleep(1000)
-                        createAudioFromText(apisim.success, 'simsimi', 'id_001')
-                        await sleep(1000)
-                        bob.sendMessage(m.chat, {audio: fs.readFileSync(`simsimi.mp3`), mimetype: 'audio/mp4', ptt: true}, {quoted: m})
-                        } 
+
                     
                         if (budy.startsWith('x')) {
                     if (!isCreator) return reply(mess.owner)
